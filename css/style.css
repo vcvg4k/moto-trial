@@ -1,0 +1,567 @@
+/* ==========================================================================
+   Zoomy Moto! — Toy Playset UI & Cross-Browser Responsive Styles
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #80d8ff;
+  font-family: 'Segoe UI Rounded', 'Chalkboard SE', 'Comic Sans MS', 'Trebuchet MS', system-ui, -apple-system, sans-serif;
+  touch-action: none;
+}
+
+#game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Top HUD
+   ========================================================================== */
+#hud {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  right: max(14px, env(safe-area-inset-right));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.hud-center {
+  flex: 1;
+  max-width: 340px;
+  margin: 0 14px;
+  pointer-events: none;
+}
+
+.level-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 4px solid #ffb300;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #37474f;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.14);
+}
+
+.pill-star {
+  color: #ffb300;
+  font-size: 24px;
+}
+
+.progress-track {
+  position: relative;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 4px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.13);
+  overflow: visible;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #4cd964, #ffca28);
+  border-radius: 999px;
+  transition: width 0.08s linear;
+}
+
+.progress-bike {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -58%) scaleX(-1);
+  font-size: 24px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+  transition: left 0.08s linear;
+}
+
+.progress-flag {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-56%);
+  font-size: 22px;
+}
+
+/* ==========================================================================
+   Buttons (Toy 3D Push Buttons)
+   ========================================================================== */
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.icon-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #37474f;
+  border: 3px solid #eceff1;
+  box-shadow: 0 6px 0 #cfd8dc, 0 8px 14px rgba(0, 0, 0, 0.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.icon-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #cfd8dc;
+}
+
+.icon-btn.retry-accent {
+  background: #ffca28;
+  border-color: #ffe082;
+  color: #4e342e;
+  box-shadow: 0 6px 0 #ffa000, 0 8px 14px rgba(0, 0, 0, 0.16);
+}
+
+.icon-btn.retry-accent:active {
+  box-shadow: 0 2px 0 #ffa000;
+}
+
+.big-btn {
+  border-radius: 28px;
+  padding: 16px 32px;
+  min-width: 96px;
+  min-height: 82px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 900;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.green-btn {
+  background: linear-gradient(180deg, #4cd964 0%, #2ecc71 100%);
+  border: 4px solid #a5f3b4;
+  box-shadow: 0 9px 0 #1e9e52, 0 14px 24px rgba(0, 0, 0, 0.22);
+}
+.green-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 3px 0 #1e9e52;
+}
+
+.blue-btn {
+  background: linear-gradient(180deg, #4fc3f7 0%, #039be5 100%);
+  border: 4px solid #b3e5fc;
+  box-shadow: 0 8px 0 #0277bd, 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+.blue-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #0277bd;
+}
+
+.amber-btn {
+  background: linear-gradient(180deg, #ffd54f 0%, #ffb300 100%);
+  border: 4px solid #ffecb3;
+  box-shadow: 0 8px 0 #ef6c00, 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+.amber-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 #ef6c00;
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.pulse-btn {
+  animation: gentlePulse 1.7s infinite ease-in-out;
+}
+.pulse-btn:active {
+  animation: none;
+  transform: translateY(6px);
+}
+
+/* ==========================================================================
+   First-Class Touch & Pointer Controls (Bottom Corners)
+   ========================================================================== */
+#touch-controls {
+  position: absolute;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  left: max(16px, env(safe-area-inset-left));
+  right: max(16px, env(safe-area-inset-right));
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.pedal-btn {
+  pointer-events: auto;
+  width: clamp(128px, 24vw, 195px);
+  height: clamp(108px, 20vh, 152px);
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  opacity: 0.93;
+  transition: transform 0.05s ease, box-shadow 0.05s ease, filter 0.05s ease;
+}
+
+.pedal-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.pedal-svg {
+  width: clamp(50px, 9vw, 68px);
+  height: clamp(50px, 9vw, 68px);
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.18));
+}
+
+.pedal-label {
+  font-size: clamp(17px, 2.5vw, 23px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  margin-top: -2px;
+}
+
+.brake-pedal {
+  background: linear-gradient(180deg, #ff7043 0%, #e53935 100%);
+  border: 5px solid #ffccbc;
+  box-shadow: 0 10px 0 #b71c1c, 0 14px 24px rgba(0, 0, 0, 0.25);
+}
+
+.brake-pedal.pressed, .brake-pedal:active {
+  transform: translateY(7px) scale(0.97);
+  box-shadow: 0 3px 0 #b71c1c, 0 6px 12px rgba(0, 0, 0, 0.22);
+  filter: brightness(1.08);
+}
+
+.accel-pedal {
+  width: clamp(144px, 27vw, 215px);
+  height: clamp(118px, 22vh, 165px);
+  background: linear-gradient(180deg, #4cd964 0%, #26a65b 100%);
+  border: 5px solid #b9f6ca;
+  box-shadow: 0 10px 0 #1b7943, 0 14px 24px rgba(0, 0, 0, 0.25);
+}
+
+.accel-pedal.pressed, .accel-pedal:active {
+  transform: translateY(7px) scale(0.97);
+  box-shadow: 0 3px 0 #1b7943, 0 6px 12px rgba(0, 0, 0, 0.22);
+  filter: brightness(1.08);
+}
+
+/* Visual Speed Feel Meter (Center Bottom, Zero Numbers) */
+.speed-arc-wrap {
+  background: rgba(255, 255, 255, 0.86);
+  border: 4px solid #ffffff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.14);
+}
+
+.speed-segments {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 28px;
+}
+
+.spd-seg {
+  width: 14px;
+  border-radius: 6px;
+  background: #cfd8dc;
+  opacity: 0.35;
+  transition: opacity 0.07s ease, transform 0.07s ease;
+}
+
+#spd-seg-1 { height: 12px; }
+#spd-seg-2 { height: 15px; }
+#spd-seg-3 { height: 18px; }
+#spd-seg-4 { height: 21px; }
+#spd-seg-5 { height: 25px; }
+#spd-seg-6 { height: 29px; }
+
+.spd-seg.active {
+  opacity: 1;
+  transform: scaleY(1.1);
+}
+.spd-seg.seg-slow.active { background: #29b6f6; }
+.spd-seg.seg-med.active  { background: #66bb6a; }
+.spd-seg.seg-fast.active { background: #ff7043; }
+
+/* ==========================================================================
+   Modal Screens (Title, Level Select, Finish)
+   ========================================================================== */
+.modal-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 52, 86, 0.28);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 40;
+  padding: 16px;
+}
+
+.title-card, .panel-card, .finish-card {
+  background: #fffdf7;
+  border: 6px solid #ffffff;
+  border-radius: 40px;
+  padding: 28px 36px;
+  box-shadow: 0 14px 0 rgba(0, 0, 0, 0.16), 0 24px 48px rgba(0, 0, 0, 0.28);
+  text-align: center;
+  max-width: 540px;
+  width: 100%;
+  animation: cardPop 0.32s cubic-bezier(0.22, 1.35, 0.5, 1);
+}
+
+@keyframes cardPop {
+  from { transform: scale(0.8) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.title-badge {
+  font-size: 54px;
+  margin-bottom: 4px;
+}
+
+.game-logo {
+  margin: 0 0 24px 0;
+  line-height: 1.02;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-zoomy {
+  font-size: clamp(44px, 9vw, 68px);
+  font-weight: 900;
+  color: #ff5722;
+  text-shadow: 0 5px 0 #bf360c, 0 8px 16px rgba(0,0,0,0.16);
+  letter-spacing: 2px;
+}
+
+.logo-moto {
+  font-size: clamp(38px, 8vw, 58px);
+  font-weight: 900;
+  color: #ffb300;
+  text-shadow: 0 5px 0 #e65100, 0 8px 16px rgba(0,0,0,0.16);
+  letter-spacing: 3px;
+}
+
+.title-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+#btn-play {
+  width: 170px;
+  height: 98px;
+  border-radius: 34px;
+}
+
+.title-sub-actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* Level Grid */
+.panel-card {
+  max-width: 660px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.panel-title-icons {
+  font-size: 34px;
+  letter-spacing: 6px;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 16px;
+}
+
+.level-tile {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f8e9 100%);
+  border: 4px solid #aed581;
+  border-radius: 26px;
+  padding: 14px 10px;
+  box-shadow: 0 7px 0 #7cb342, 0 10px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.08s ease;
+}
+
+.level-tile:active {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 #7cb342;
+}
+
+.level-tile-num {
+  font-size: 34px;
+  font-weight: 900;
+  color: #33691e;
+}
+
+.level-tile-icon {
+  font-size: 26px;
+}
+
+.level-tile-stars {
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #cfd8dc;
+}
+
+.level-tile-stars .earned {
+  color: #ffb300;
+  text-shadow: 0 2px 0 #ef6c00;
+}
+
+/* Finish Celebration Card */
+.finish-trophy {
+  font-size: 68px;
+  margin-bottom: 4px;
+  animation: gentlePulse 1.2s infinite ease-in-out;
+}
+
+.finish-stars {
+  font-size: 58px;
+  letter-spacing: 10px;
+  margin-bottom: 24px;
+}
+
+.star-slot {
+  color: #dfe6e9;
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.2, 1.5, 0.5, 1), color 0.25s;
+}
+
+.star-slot.earned {
+  color: #ffc107;
+  text-shadow: 0 5px 0 #e65100;
+  transform: scale(1.15);
+}
+
+.finish-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   Developer Editor Toolbar
+   ========================================================================== */
+.editor-bar {
+  position: absolute;
+  top: 76px;
+  left: 14px;
+  right: 14px;
+  background: rgba(30, 41, 59, 0.92);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  z-index: 35;
+  font-size: 13px;
+}
+
+.editor-title {
+  font-weight: 800;
+  color: #38bdf8;
+  margin-right: 6px;
+}
+
+.ed-btn {
+  background: #334155;
+  color: #f8fafc;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.ed-btn:hover { background: #475569; }
+.ed-danger { background: #dc2626; }
+.ed-good { background: #16a34a; }
+
+/* Small screen responsiveness */
+@media (max-height: 500px) {
+  .title-card, .panel-card, .finish-card {
+    padding: 16px 24px;
+    border-radius: 28px;
+  }
+  .title-badge, .finish-trophy { font-size: 40px; }
+  .finish-stars { font-size: 42px; margin-bottom: 12px; }
+  #btn-play { height: 74px; width: 140px; }
+  .big-btn { min-height: 66px; padding: 10px 22px; }
+  .speed-arc-wrap { display: none; }
+}
